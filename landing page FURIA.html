@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furia eSports</title>
+    <!-- Adicionar Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-Fo3rlrZj/kNVqGkU68jV0ReoW4+/3hcEos9e6x6v2i2p9K6al9V6z3fDk1ZYo0RG" crossorigin="anonymous">
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #f4f4f4;
+            background-color: #111;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Cabeçalho */
+        header {
+            padding: 20px;
+            background: linear-gradient(90deg, #111, #333);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 120px; /* Aumentar a altura do header */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            color: #ffffff;
+            font-size: 3em; /* Aumentar o tamanho da fonte */
+            animation: slide-in 1s forwards;
+        }
+
+        .social-icons {
+            display: flex;
+            align-items: center;
+        }
+
+        .social-icons a {
+            color: #f4f4f4;
+            font-size: 1.2em;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .social-icons a:hover {
+            color: #cc0000;
+        }
+
+        /* Ícones Font Awesome */
+        .social-icons a i {
+            margin-right: 5px;
+        }
+
+        /* Botão da Loja */
+        .store-button {
+            display: inline-block;
+            margin-left: 20px;
+            padding: 10px 20px;
+            background-color: #cc0000;
+            color: #fff;
+            font-size: 1em;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .store-button:hover {
+            background-color: #a30000;
+            transform: scale(1.05);
+        }
+
+        /* Carrossel */
+        .carousel {
+            margin: 40px 0;
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 1s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .carousel img.active {
+            opacity: 1;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 2em;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .carousel-button:hover {
+            background-color: #cc0000;
+        }
+
+        /* Notícias */
+        .news-section {
+            margin-top: 60px;
+            background-color: #222;
+            padding: 40px 20px;
+            border-radius: 10px;
+            animation: fade-in 1s forwards;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .news-section h2 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        .news-item {
+            background-color: #333;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .news-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .news-item h3 {
+            color: #ffffff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .news-item p {
+            color: #ddd;
+        }
+
+        /* Rodapé */
+        footer {
+            padding: 20px;
+            background: linear-gradient(90deg, #333, #111);
+            margin-top: 40px;
+            width: 100%;
+            box-shadow: 0 -4px 6px rgba(0,0,0,0.3);
+        }
+
+        footer p {
+            color: #f4f4f4;
+            margin: 10px 0;
+        }
+
+        footer .social-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer .social-icons a {
+            font-size: 1.2em;
+            color: #f4f4f4;
+            text-decoration: none;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        footer .social-icons a:hover {
+            color: #cc0000;
+        }
+
+        /* Animações */
+        @keyframes slide-in {
+            from {
+                opacity: 0;
+                transform: translateX(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <h1>Furia eSports</h1>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/furiagg" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+            <a href="https://x.com/FURIA" target="_blank"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="https://www.youtube.com/@FURIAgg" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
+            <a href="https://www.furia.gg/" target="_blank" class="store-button">Visite nossa Loja Oficial</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Carrossel de Imagens -->
+        <section class="carousel">
+            <img src="https://s2.glbimg.com/LJMxM1-oF_AL47Z3xZxykonCqHQ=/0x0:1080x827/984x0/smart/filters:strip_icc()/s.glbimg.com/es/ge/f/original/2019/06/07/furiagg_61494485_2446840332034777_4751580801307990116_n.jpg" alt="Furia Team Image 1" class="carousel-image active">
+            <img src="https://cdn.ome.lt/7W-hvLGFV1046YznreT3rljWIbE=/970x360/smart/uploads/conteudo/fotos/furia-aniversario-6-anos.png" alt="Furia Team Image 2" class="carousel-image">
+            <img src="https://opopular.com.br/image/policy%3A1.2355970%3A1676252667%2Fimage.jpg%3F%26f%3D3x2" alt="Furia Team Image 3" class="carousel-image">
+            <div class="carousel-buttons">
+                <button class="carousel-button" onclick="prevImage()">&#10094;</button>
+                <button class="carousel-button" onclick="nextImage()">&#10095;</button>
+            </div>
+        </section>
+
+        <!-- Notícias dos Jogos -->
+        <section class="news-section">
+            <h2>Últimas Notícias</h2>
+            <div class="news-item">
+                <h3>Analista da Furia compara FalleN a Karrigan</h3>
+                <p>Ressalta Viacheslav "innersh1ne" Britvin: "É fácil trabalhar com ele".</p>
+            </div>
+            <div class="news-item">
+                <h3>Furia bate times do top-6 para chegar à semi</h3>
+                <p>A Furia chegou à semifinal do IEM Rio 2024, em uma performance inigualável.</p>
+            </div>
+            <div class="news-item">
+                <h3>KSCERATO emplaca segundo maior rating da IEM 2024</h3>
+                <p>Mesmo com a derrota da Furia para a equipe da MOUZ, Kaike "KSCERATO" Cerato terminou a competição com o segundo melhor rating dos participantes.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2023 Furia eSports. Todos os direitos reservados.</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/furiagg?igsh=MW9iaWJ5cHRmb3c0cg==" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
+            <a href="https://x.com/FURIA" target="_blank"><i class="fab fa-twitter"></i>Twitter</a>
+            <a href="https://www.youtube.com/@FURIAgg" target="_blank"><i class="fab fa-youtube"></i>YouTube</a>
+        </div>
+    </footer>
+
+    <script>
+        // Função do Carrossel
+        let currentIndex = 0;
+        const images = document.querySelectorAll('.carousel-image');
+
+        function showImage(index) {
+            images.forEach((img, i) => {
+                img.classList.remove('active');
+                if (i === index) {
+                    img.classList.add('active');
+                }
+            });
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        }
+
+        // Intervalo para o carrossel
+        let carouselInterval = setInterval(nextImage, 5000);
+
+        // Pausar o carrossel ao passar o mouse
+        const carousel = document.querySelector('.carousel');
+
+        carousel.addEventListener('mouseenter', () => {
+            clearInterval(carouselInterval);
+        });
+
+        carousel.addEventListener('mouseleave', () => {
+            carouselInterval = setInterval(nextImage, 5000);
+        });
+    </script>
+</body>
+</html>
